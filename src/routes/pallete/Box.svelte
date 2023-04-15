@@ -24,8 +24,9 @@
 		position
 	} = filledBox;
 
-	const paletteThick = 0.05;
-	const springY = tweened(position.y + 0.23 + paletteThick * 1.5, {
+	const PALLET_THICK = 0.05;
+
+	const springY = tweened(position.y + 0.23 + PALLET_THICK * 1.5, {
 		duration: 2000,
 		easing: cubicOut
 	});
@@ -36,18 +37,18 @@
 	});
 
 	onMount(() => {
-		$springY = position.y + paletteThick * 0.5 + 0.001;
+		$springY = position.y + PALLET_THICK * 0.5 + 0.001;
 		$opacity = 1;
 	});
 
 	onDestroy(() => {
-		$springY = position.y + 0.23 + paletteThick * 1.5;
+		$springY = position.y + 0.23 + PALLET_THICK * 1.5;
 		$opacity = 0;
 	});
 </script>
 
 <T.Group>
-	<T.Mesh position={[position.x, $springY, position.z]}>
+	<T.Mesh position={[position.x, $springY, position.z]} castShadow>
 		<T.BoxGeometry
 			args={[dimensions.dx - 0.0001, dimensions.dy - 0.001, dimensions.dz - 0.00001, 10]}
 		/>
