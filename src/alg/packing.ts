@@ -2,61 +2,59 @@ export const SIZE_DELTA = 20;
 
 export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
 	palettes: [
-		[
-			{
-				boxes: [
-					{
-						box: {
-							dimensions: {
-								dx: SIZE_DELTA * 3,
-								dy: SIZE_DELTA * 2,
-								dz: SIZE_DELTA * 1
-							},
-							weight: 20
+		{
+			boxes: [
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 3,
+							dy: SIZE_DELTA * 2,
+							dz: SIZE_DELTA * 1
 						},
-						position: { x: 0, y: 0, z: 0 }
+						weight: 20
 					},
-					{
-						box: {
-							dimensions: {
-								dx: SIZE_DELTA * 1,
-								dy: SIZE_DELTA * 1,
-								dz: SIZE_DELTA * 1
-							},
-							weight: 10
+					position: { x: 0, y: 0, z: 0 }
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 1,
+							dy: SIZE_DELTA * 1,
+							dz: SIZE_DELTA * 1
 						},
-						position: { x: 0, y: 0, z: SIZE_DELTA * 1 }
+						weight: 10
 					},
-					{
-						box: {
-							dimensions: {
-								dx: SIZE_DELTA * 2,
-								dy: SIZE_DELTA * 3,
-								dz: SIZE_DELTA * 1
-							},
-							weight: 40
+					position: { x: 0, y: 0, z: SIZE_DELTA * 1 }
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 2,
+							dy: SIZE_DELTA * 3,
+							dz: SIZE_DELTA * 1
 						},
-						position: { x: SIZE_DELTA * 3, y: 0, z: SIZE_DELTA * 1 }
+						weight: 40
 					},
-					{
-						box: {
-							dimensions: {
-								dx: SIZE_DELTA * 4,
-								dy: SIZE_DELTA * 10,
-								dz: SIZE_DELTA * 2
-							},
-							weight: 100
+					position: { x: SIZE_DELTA * 3, y: 0, z: SIZE_DELTA * 1 }
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 4,
+							dy: SIZE_DELTA * 10,
+							dz: SIZE_DELTA * 2
 						},
-						position: { x: SIZE_DELTA * 4, y: 0, z: SIZE_DELTA * 2 }
-					}
-				],
-				dimensions: {
-					dx: SIZE_DELTA * 8,
-					dy: SIZE_DELTA * 10,
-					dz: SIZE_DELTA * 4
+						weight: 100
+					},
+					position: { x: SIZE_DELTA * 4, y: 0, z: SIZE_DELTA * 2 }
 				}
+			],
+			dimensions: {
+				dx: SIZE_DELTA * 8,
+				dy: SIZE_DELTA * 10,
+				dz: SIZE_DELTA * 4
 			}
-		]
+		}
 	]
 };
 
@@ -92,12 +90,10 @@ function normalizeBox(
 export function fill(packingArea: PackingArea, boxes: Box[]): FilledPackingArea {
 	return {
 		palettes: [
-			[
-				{
-					boxes: boxes.map((box) => ({ box: box, position: { x: 0, y: 0, z: 0 } })),
-					dimensions: packingArea.palettes[0][0].dimensions
-				}
-			]
+			{
+				boxes: boxes.map((box) => ({ box: box, position: { x: 0, y: 0, z: 0 } })),
+				dimensions: packingArea.palettes[0][0].dimensions
+			}
 		]
 	};
 }
@@ -123,7 +119,7 @@ export interface Palett {
 }
 
 export interface FilledPackingArea {
-	palettes: FilledPalett[][];
+	palettes: FilledPalett[];
 }
 
 export interface FilledPalett extends Palett {
