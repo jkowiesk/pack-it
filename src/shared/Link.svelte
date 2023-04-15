@@ -15,7 +15,9 @@
 	<div
 		class={'hidden group-[.selected]:block w-10 absolute right-full bottom-[-1px] top-[29px] bg-gray-100 before:absolute before:inset-0 before:rounded-br-full before:bg-neutral-800'}
 	/>
-	<a {href} class="block text-gray-100 px-2 pt-2 pb-3 bg-neutral-800 rounded-[50%]"><slot /></a>
+	<a {href} class="block text-gray-100 px-2 pt-2 pb-3 bg-neutral-800 rounded-[50%] relative z-10"
+		><slot /></a
+	>
 	<div
 		class={'hidden group-[.selected]:block w-10 absolute left-full bottom-[-1px] top-[29px] bg-gray-100 before:absolute before:inset-0 before:rounded-bl-full before:bg-neutral-800'}
 	/>

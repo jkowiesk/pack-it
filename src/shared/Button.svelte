@@ -7,7 +7,7 @@
 	on:click
 	{disabled}
 	class="
-     transition transition duration-100
+     transition duration-100
     text-xl text-gray-100 rounded-md px-1 pb-1 flex items-center justify-center {style}
     {disabled
 		? 'bg-gray-600'

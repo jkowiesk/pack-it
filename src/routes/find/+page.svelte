@@ -99,7 +99,7 @@
 					++boxIdx;
 				} else {
 					if (palletIdx === SAMPLE_FILLED_PACKING_AREA.palettes.length - 1) {
-						history.pushState(null, '', '/load');
+						location.href = '../load';
 					} else {
 						boxIdx = 0;
 						++palletIdx;
