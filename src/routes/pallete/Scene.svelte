@@ -18,8 +18,8 @@
 <!-- minPolarAngle={Math.PI * (1 / 4)}
 maxPolarAngle={Math.PI * (1 / 3)} -->
 
-<T.AmbientLight color="#ffffff" intensity={0.3} />
-<T.DirectionalLight color="#ffffff" intensity={0.5} position={[1, 3, 1]} />
+<T.AmbientLight color="#ffffff" intensity={0.4} />
+<T.DirectionalLight color="#ffffff" intensity={0.2} position={[0, 3, 0]} />
 
 <Pallet />
 

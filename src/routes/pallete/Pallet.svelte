@@ -8,7 +8,14 @@
 </script>
 
 {#if $gltf}
-	<T.Group rotation.x={Math.PI} scale={0.22} position={[0, -0.1, 0]}>
+	<T.Group
+		rotation.x={Math.PI}
+		scale={0.22}
+		scale.x={0.19}
+		scale.z={0.28}
+		scale.y={0.22}
+		position={[0, -0.032, 0]}
+	>
 		<Object3DInstance object={$gltf.nodes['Object_2']} />
 		<Object3DInstance object={$gltf.nodes['Object_3']} />
 		<Object3DInstance object={$gltf.nodes['Object_4']} />
@@ -17,16 +24,8 @@
 	</T.Group>
 {/if}
 
-<!-- {#await gltf}
-	<p>...waiting</p>
-{:then gltf}
-	<T.Group>
-		<T.Mesh
-			geometry={gltf.scene.children[0].geometry}
-			material={gltf.scene.children[0].material}
-			scale={[1, 1, 1]}
-			position={[0, 0, 0]}
-		/>
-	</T.Group>
-{/await}
+<!-- <T.Mesh rotation.x={Math.PI / 2} position={[0, 0, 0]}>
+	<T.BoxGeometry args={[1, 1, PALLET_THICK, 10]} />
+	<T.MeshLambertMaterial color="#94a3b8" wireframe />
+</T.Mesh>
  -->
