@@ -2,5 +2,5 @@
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 <script>
     import {normalize, SAMPLE_FILLED_PACKING_AREA} from "../alg/packing";
-    console.log(normalize(SAMPLE_FILLED_PACKING_AREA))
+    console.log(normalize(SAMPLE_FILLED_PACKING_AREA.palettes[0][0]))
 </script>

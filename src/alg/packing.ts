@@ -1,7 +1,7 @@
 export const SIZE_DELTA = 20;
 
 export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
-  paletts: [{
+  palettes: [[{
     boxes: [
       {
         box: {
@@ -53,16 +53,14 @@ export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
       dy: SIZE_DELTA * 10,
       dz: SIZE_DELTA * 4
     }
-  }]
+  }]]
 }
 
-export function normalize(packingArea: FilledPackingArea): FilledPackingArea {
+export function normalize(palett: FilledPalett): FilledPalett {
   return {
-    paletts: packingArea.paletts.map(palett => ({
-      dimensions: palett.dimensions,
-      boxes: palett.boxes.map(pBox => normalizeBox(pBox, palett.dimensions))
-    }))
-  }
+    dimensions: palett.dimensions,
+    boxes: palett.boxes.map(pBox => normalizeBox(pBox, palett.dimensions))
+  };
 }
 
 function normalizeBox({box, position}: PositionedBox, palettDimensions: Dimensions): PositionedBox {
@@ -79,22 +77,22 @@ function normalizeBox({box, position}: PositionedBox, palettDimensions: Dimensio
     },
     box: {
       weight: box.weight,
-      dimensions: boxDimensionsNormalized
+      dimensions: boxDimensionsNormalized,
     }
   }
 }
 
 export function fill(packingArea: PackingArea, boxes: Box[]): FilledPackingArea {
   return {
-    paletts: [{
+    palettes: [[{
       boxes: boxes.map(box => ({box: box, position: {x: 0, y: 0, z: 0}})),
-      dimensions: packingArea.paletts[0][0].dimensions
-    }]
+      dimensions: packingArea.palettes[0][0].dimensions
+    }]]
   };
 }
 
 export interface PackingArea {
-  paletts: Palett[][]
+  palettes: Palett[][]
 }
 
 export function makePackingArea(
@@ -103,7 +101,7 @@ export function makePackingArea(
   length: number
 ): PackingArea {
   return {
-    paletts: [...Array(length)].map(() => Array(width).map(() => ({dimensions: palettDimention})))
+    palettes: [...Array(length)].map(() => Array(width).map(() => ({dimensions: palettDimention})))
   };
 }
 
@@ -112,7 +110,7 @@ export interface Palett {
 }
 
 export interface FilledPackingArea {
-  paletts: FilledPalett[]
+  palettes: FilledPalett[][]
 }
 
 export interface FilledPalett extends Palett {
