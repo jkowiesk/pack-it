@@ -11,7 +11,7 @@
 	// console.log(boxes);
 </script>
 
-<T.PerspectiveCamera makeDefault position={[0, 0.8, -1.1]}
+<T.PerspectiveCamera makeDefault position={[0, 1.4, -1.7]}
 	><OrbitControls enableDamping /></T.PerspectiveCamera
 >
 
