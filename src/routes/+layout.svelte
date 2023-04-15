@@ -1,9 +1,15 @@
 <script lang="ts">
-    import "../app.css";
+	import '../app.css';
+	import arrow from '../assets/arrow.svg';
+	import Link from '../shared/Link.svelte';
 </script>
 
 <div class="w-screen h-screen bg-gradient-to-tl from-gray-900 to-gray-800 flex flex-col">
-    <div class="w-full h-16 shadow-md shadow-neutral-900 bg-neutral-800"></div>
-    <slot/>
+	<div class="pl-4 gap-6 flex items-end w-full h-16 shadow-md shadow-neutral-900 bg-neutral-800">
+		<img src={arrow} alt="back arrow" class="h-5 self-center" />
+		<Link isSelected>find</Link>
+		<Link>arrange</Link>
+		<Link>load</Link>
+	</div>
+	<slot />
 </div>
-

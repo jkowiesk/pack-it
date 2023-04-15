@@ -1,17 +1,13 @@
 <script lang="ts">
 	import { T } from '@threlte/core';
 	import { OrbitControls } from '@threlte/extras';
-	import { DirectionalLight } from 'three';
-	import { spring } from 'svelte/motion';
-	import { SAMPLE_FILLED_PACKING_AREA, type PositionedBox, normalize } from '../../alg/packing';
-	import Box from './Box.svelte';
 	import Pallet from './Pallet.svelte';
-	import { fromNormalizedToSvelte } from './utils';
+	import { interactivity } from '@threlte/extras';
+	import Box from './Box.svelte';
+	import type { PositionedBox } from '../../alg/packing';
+	interactivity();
 
-	const boxes = fromNormalizedToSvelte(
-		normalize(SAMPLE_FILLED_PACKING_AREA.palettes[0][0])
-	).boxes.slice(0, 4);
-
+	export let boxes: PositionedBox[];
 	// console.log(boxes);
 </script>
 

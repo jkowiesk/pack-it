@@ -2,7 +2,6 @@
 	import { T, Object3DInstance } from '@threlte/core';
 	import * as THREE from 'three';
 	import { useGltf } from '@threlte/extras';
-	const PALLET_THICK = 0.05;
 
 	const gltf = useGltf('/pallet.glb');
 	/* 	let group: THREE.Group;
@@ -16,8 +15,6 @@
 		}
 	} */
 </script>
-
-}
 
 {#if $gltf}
 	<T.Group rotation.x={Math.PI} scale={0.24} position={[0, -0.04, 0]}>
