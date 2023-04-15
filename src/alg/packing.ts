@@ -1,58 +1,60 @@
-export const STANDARD_DIMENTIONS: Dimentions = {dx: 1, dy: 2, dz: 3}
-
 export function fill(packingArea: PackingArea, boxes: Box[]): FilledPackingArea {
-  return {
-    palletes: [{
-      boxes: boxes.map(box => ({box: box, position: {x: 0, y: 0, z: 0}})),
-      dimentions: packingArea.palletes[0][0].dimentions
-    }]
-  };
+	return {
+		palettes: [
+			{
+				boxes: boxes.map((box) => ({ box: box, position: { x: 0, y: 0, z: 0 } })),
+				dimensions: packingArea.palettes[0][0].dimensions
+			}
+		]
+	};
 }
 
 export interface PackingArea {
-  palletes: Pallete[][]
+	palettes: Palette[][];
 }
 
 export function makePackingArea(
-  palleteDimention: Dimentions,
-  width: number,
-  length: number
+	paletteDimension: Dimensions,
+	width: number,
+	length: number
 ): PackingArea {
-  return {
-    palletes: [...Array(length)].map(() => Array(width).map(() => ({dimentions: palleteDimention})))
-  };
+	return {
+		palettes: [...Array(length)].map(() =>
+			Array(width).map(() => ({ dimensions: paletteDimension }))
+		)
+	};
 }
 
-export interface Pallete {
-  dimentions: Dimentions
+export interface Palette {
+	dimensions: Dimensions;
 }
 
 export interface FilledPackingArea {
-  palletes: FilledPallete[]
+	palettes: FilledPalette[];
 }
 
-export interface FilledPallete extends Pallete {
-  boxes: PositionedBox[]
+export interface FilledPalette extends Palette {
+	boxes: PositionedBox[];
 }
 
 export interface PositionedBox {
-  box: Box
-  position: Position
+	box: Box;
+	position: Position;
 }
 
 export interface Box {
-  dimentions: Dimentions
-  weight: number
+	dimensions: Dimensions;
+	weight: number;
 }
 
 export interface Position {
-  x: number
-  y: number
-  z: number
+	x: number;
+	y: number;
+	z: number;
 }
 
-export interface Dimentions {
-  dx: number
-  dy: number
-  dz: number
+export interface Dimensions {
+	dx: number;
+	dy: number;
+	dz: number;
 }

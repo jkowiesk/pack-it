@@ -2,16 +2,24 @@
 	import { T } from '@threlte/core';
 	import { OrbitControls } from '@threlte/extras';
 	import { DirectionalLight } from 'three';
+	import { spring } from 'svelte/motion';
+	import { interactivity } from '@threlte/extras';
+	import type { PositionedBox } from '../../alg/packing';
+	import Box from './Box.svelte';
+	interactivity();
 
-	type Box = {
-		state: 'slaped' | 'unslaped';
+	const paletteThick = 0.05;
+
+	const box: PositionedBox = {
+		box: { dimensions: { dx: 0.1, dy: 0.1, dz: 0.1 }, weight: 100 },
+		position: { x: -0.45, y: 0, z: 0 }
 	};
 
-	const boxes: Box[] = Array(10).fill({ state: 'unslaped' });
+	const boxes: PositionedBox[] = Array(1).fill(box);
 	let state;
 </script>
 
-<T.PerspectiveCamera makeDefault position={[0, 1, -1]}
+<T.PerspectiveCamera makeDefault position={[0, 0.8, -1.1]}
 	><OrbitControls
 		enableDamping
 		minPolarAngle={Math.PI * (1 / 4)}
@@ -22,13 +30,10 @@
 <T.AmbientLight color="#ffffff" intensity={0.5} />
 <T.DirectionalLight color="#ffffff" intensity={0.5} position={[0, 1, 0]} />
 <T.Mesh rotation.x={Math.PI / 2} position={[0, 0, 0]}>
-	<T.BoxGeometry args={[1, 1, 0.05, 10]} />
-	<T.MeshLambertMaterial color="#4c0519" />
+	<T.BoxGeometry args={[1, 1, paletteThick, 10]} />
+	<T.MeshLambertMaterial color="#94a3b8" />
 </T.Mesh>
 
 {#each boxes as box, i}
-	<T.Mesh position={[0, 0, i * 0.1]}>
-		<T.BoxGeometry args={[1, 1, 0.05, 10]} />
-		<T.MeshLambertMaterial color="#e11d48" />
-	</T.Mesh>
+	<Box filledBox={box} isLast={i === boxes.length - 1} />
 {/each}
