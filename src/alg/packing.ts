@@ -1,39 +1,128 @@
+export const SIZE_DELTA = 20;
+
+export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
+	paletts: [
+		{
+			boxes: [
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 3,
+							dy: SIZE_DELTA * 2,
+							dz: SIZE_DELTA * 1
+						},
+						weight: 20
+					},
+					position: { x: 0, y: 0, z: 0 }
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 1,
+							dy: SIZE_DELTA * 1,
+							dz: SIZE_DELTA * 1
+						},
+						weight: 10
+					},
+					position: { x: 0, y: 0, z: SIZE_DELTA * 1 }
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 2,
+							dy: SIZE_DELTA * 3,
+							dz: SIZE_DELTA * 1
+						},
+						weight: 40
+					},
+					position: { x: SIZE_DELTA * 3, y: 0, z: SIZE_DELTA * 1 }
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 4,
+							dy: SIZE_DELTA * 10,
+							dz: SIZE_DELTA * 2
+						},
+						weight: 100
+					},
+					position: { x: SIZE_DELTA * 4, y: 0, z: SIZE_DELTA * 2 }
+				}
+			],
+			dimensions: {
+				dx: SIZE_DELTA * 8,
+				dy: SIZE_DELTA * 10,
+				dz: SIZE_DELTA * 4
+			}
+		}
+	]
+};
+
+export function normalize(packingArea: FilledPackingArea): FilledPackingArea {
+	return {
+		paletts: packingArea.paletts.map((palett) => ({
+			dimensions: palett.dimensions,
+			boxes: palett.boxes.map((pBox) => normalizeBox(pBox, palett.dimensions))
+		}))
+	};
+}
+
+function normalizeBox(
+	{ box, position }: PositionedBox,
+	palettDimensions: Dimensions
+): PositionedBox {
+	const boxDimensionsNormalized: Dimensions = {
+		dx: box.dimensions.dx / palettDimensions.dx,
+		dy: box.dimensions.dy / palettDimensions.dy,
+		dz: box.dimensions.dz / palettDimensions.dz
+	};
+	return {
+		position: {
+			x: position.x / palettDimensions.dx - 0.5 + boxDimensionsNormalized.dx / 2,
+			y: position.y / palettDimensions.dy + boxDimensionsNormalized.dy / 2,
+			z: position.z / palettDimensions.dz - 0.5 + boxDimensionsNormalized.dz / 2
+		},
+		box: {
+			weight: box.weight,
+			dimensions: boxDimensionsNormalized
+		}
+	};
+}
+
 export function fill(packingArea: PackingArea, boxes: Box[]): FilledPackingArea {
 	return {
-		palettes: [
+		paletts: [
 			{
 				boxes: boxes.map((box) => ({ box: box, position: { x: 0, y: 0, z: 0 } })),
-				dimensions: packingArea.palettes[0][0].dimensions
+				dimensions: packingArea.paletts[0][0].dimensions
 			}
 		]
 	};
 }
 
 export interface PackingArea {
-	palettes: Palette[][];
+	paletts: Palett[][];
 }
 
 export function makePackingArea(
-	paletteDimension: Dimensions,
+	palettDimention: Dimensions,
 	width: number,
 	length: number
 ): PackingArea {
 	return {
-		palettes: [...Array(length)].map(() =>
-			Array(width).map(() => ({ dimensions: paletteDimension }))
-		)
+		paletts: [...Array(length)].map(() => Array(width).map(() => ({ dimensions: palettDimention })))
 	};
 }
 
-export interface Palette {
+export interface Palett {
 	dimensions: Dimensions;
 }
 
 export interface FilledPackingArea {
-	palettes: FilledPalette[];
+	paletts: FilledPalett[];
 }
 
-export interface FilledPalette extends Palette {
+export interface FilledPalett extends Palett {
 	boxes: PositionedBox[];
 }
 
