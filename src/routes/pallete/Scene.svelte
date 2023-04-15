@@ -6,8 +6,12 @@
 	import { SAMPLE_FILLED_PACKING_AREA, type PositionedBox, normalize } from '../../alg/packing';
 	import Box from './Box.svelte';
 	import Pallet from './Pallet.svelte';
+	import { fromNormalizedToSvelte } from './utils';
 
-	const boxes = normalize(SAMPLE_FILLED_PACKING_AREA.palettes[0][0]).boxes.slice(0, 4);
+	const boxes = fromNormalizedToSvelte(
+		normalize(SAMPLE_FILLED_PACKING_AREA.palettes[0][0])
+	).boxes.slice(0, 4);
+
 	// console.log(boxes);
 </script>
 
