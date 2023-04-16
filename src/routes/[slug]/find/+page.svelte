@@ -148,14 +148,22 @@
 	});
 </script>
 
-<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" class="p-8">
 	{#each shelves as { height, width, x, y }}
-		<rect width={width * 2} height={height * 2} x={x * 2} y={y * 2} />
+		<rect
+			width={width * 2}
+			height={height * 2}
+			x={x * 2}
+			y={y * 2}
+			rx="0.5"
+			ry="0.5"
+			class="fill-gray-500"
+		/>
 	{/each}
 	{#each paths as { x, y }}
-		<circle cx={x * 2 + 1} cy={y * 2 + 1} r="1" class="fill-rose-800" />
+		<circle cx={x * 2 + 1} cy={y * 2 + 1} r="0.8" class="fill-rose-800" />
 	{/each}
-	<circle cx={targetTile.y + 6} cy={targetTile.y * 2 - 1} r="1" class="fill-green-600" />
+	<circle cx={targetTile.y + 6} cy={targetTile.y * 2 - 1} r="0.9" class="fill-green-600" />
 </svg>
 
 <a href="/{orderID}/arrange" class="absolute bottom-16 right-8">

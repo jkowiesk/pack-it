@@ -106,7 +106,7 @@
 				if (boxIdx === 0) {
 					if (palletIdx > 0) {
 						--palletIdx;
-						boxIdx = SAMPLE_FILLED_PACKING_AREA.palettes[palletIdx].boxes.length - 1;
+						boxIdx = transformed.palettes[palletIdx].boxes.length - 1;
 					}
 				} else {
 					--boxIdx;
@@ -119,7 +119,7 @@
 				if (boxIdx < boxes.length) {
 					++boxIdx;
 				} else {
-					if (palletIdx === SAMPLE_FILLED_PACKING_AREA.palettes.length - 1) {
+					if (palletIdx === transformed.palettes.length - 1) {
 						goto(`../${orderID}/load`);
 					} else {
 						boxIdx = 0;
@@ -129,7 +129,7 @@
 				}
 			}}
 			style="grow basis-0 h-10"
-			>{boxIdx === boxes.length && palletIdx === SAMPLE_FILLED_PACKING_AREA.palettes.length - 1
+			>{boxIdx === boxes.length && palletIdx === transformed.palettes.length - 1
 				? 'start packing'
 				: 'next'}</Button
 		>
