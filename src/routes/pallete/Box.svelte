@@ -61,8 +61,6 @@
 
 	$: setColor(isLast ? green : BOXES_COLORS[randInt(0, BOXES_COLORS.length - 1)]);
 
-	console.log(isLast);
-
 	export let filledBox: PositionedBox;
 	const {
 		box: { dimensions, weight },

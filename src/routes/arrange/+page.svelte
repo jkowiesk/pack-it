@@ -15,8 +15,7 @@
 		normalize(SAMPLE_FILLED_PACKING_AREA.palettes[palletIdx])
 	).boxes;
 
-	$: box = boxes[boxIdx].data;
-	$: console.log(boxes[boxIdx]);
+	$: box = boxes[boxIdx - 1]?.data;
 	$: slicedBoxes = boxes.slice(0, boxIdx);
 </script>
 
@@ -94,7 +93,6 @@
 				if (boxIdx === 0) {
 					if (palletIdx > 0) {
 						--palletIdx;
-						console.log(palletIdx);
 						boxIdx = SAMPLE_FILLED_PACKING_AREA.palettes[palletIdx].boxes.length - 1;
 					}
 				} else {
@@ -105,7 +103,7 @@
 		>
 		<Button
 			on:click={() => {
-				if (boxIdx < boxes.length - 1) {
+				if (boxIdx < boxes.length) {
 					++boxIdx;
 				} else {
 					if (palletIdx === SAMPLE_FILLED_PACKING_AREA.palettes.length - 1) {

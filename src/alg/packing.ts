@@ -7,6 +7,12 @@ export interface BoxData {
 	to: string;
 }
 
+export interface Order {
+	packingArea: FilledPackingArea;
+	boxesNum: number;
+	done: boolean;
+}
+
 // geneate random BoxData from given arrays of mocked data
 
 const REF_ID = ['AD23M9384JF8', 'LE93K7DM819K', 'LJF8JF8JF8JF', 'LJF8JF8JF8JF', 'BD23G93842F8'];
@@ -147,6 +153,11 @@ export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
 		}
 	]
 };
+
+export const SAMPLE_ORDERS = new Map<string, Order>([
+	['1024', { packingArea: SAMPLE_FILLED_PACKING_AREA, boxesNum: 24, done: true }],
+	['9324', { packingArea: SAMPLE_FILLED_PACKING_AREA, boxesNum: 8, done: false }]
+]);
 
 export function normalize(palett: FilledPalett): FilledPalett {
 	return {
