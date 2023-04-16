@@ -52,7 +52,7 @@
 	<div class="flex flex-col gap-12">
 		{#each [...orders] as [orderID, order]}
 			{#if !order.done}
-				<a href="/find/{orderID}">
+				<a href="/{orderID}/find">
 					<Order {orderID} {...order} />
 				</a>
 			{:else}

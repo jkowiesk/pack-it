@@ -3,7 +3,14 @@
 
 	export let href: string;
 
-	$: isSelected = $page.route.id?.endsWith(href);
+	$: route = $page.route.id;
+	$: isSelected = href.includes(getBack($page.route.id!));
+
+	function getBack(s: String) {
+		const x = s.split('').reverse().join('');
+		const index = x.indexOf('/');
+		return x.slice(0, index).split('').reverse().join('');
+	}
 </script>
 
 <!-- before:absolute before:inset-x-[-29px] before:bottom-0 before:h-[1px] before:bg-gray-100 before:z-10 before:rounded-t-full before:hidden-->

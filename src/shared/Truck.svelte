@@ -20,11 +20,9 @@
 		{#each SAMPLE_FILLED_PACKING_AREA.palettes as _, i}
 			<img
 				src={i === palletIdx
-					? noYellow
-						? palletGreen
-						: palletYellow
-					: palletIdx !== undefined && i < palletIdx && !noYellow
 					? palletGreen
+					: palletIdx !== undefined && i >= palletIdx && !noYellow
+					? palletYellow
 					: pallet}
 				alt="pallet"
 				class="h-full w-full aspect-square cursor-pointer"

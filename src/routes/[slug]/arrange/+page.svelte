@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Button from '../../../shared/Button.svelte';
 	import { Canvas } from '@threlte/core';
 	import Scene from '../../pallete/Scene.svelte';
@@ -6,6 +6,7 @@
 	import { fromNormalizedToSvelte } from '../../pallete/utils';
 	import Truck from '../../../shared/Truck.svelte';
 	import { goto } from '$app/navigation';
+	import type { PageData } from './$types';
 
 	let palletIdx = 0;
 	let boxIdx = 0;
@@ -15,6 +16,9 @@
 
 	$: box = boxes[boxIdx - 1]?.data;
 	$: slicedBoxes = boxes.slice(0, boxIdx);
+
+	export let data: PageData;
+	const orderID = data.id;
 </script>
 
 <div class="flex flex-col gap-5 w-5/6 pt-3 mx-auto">
@@ -97,11 +101,12 @@
 					++boxIdx;
 				} else {
 					if (palletIdx === SAMPLE_FILLED_PACKING_AREA.palettes.length - 1) {
-						goto('../load');
+						goto(`../${orderID}/load`);
 					} else {
 						boxIdx = 0;
 						++palletIdx;
 					}
+					palletIdx;
 				}
 			}}
 			style="grow basis-0 h-10"
