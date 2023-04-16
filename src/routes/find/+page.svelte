@@ -2,6 +2,7 @@
 	import truck from '../../assets/truck.svg';
 	import pallet from '../../assets/pallet.svg';
 	import palletGreen from '../../assets/palletGreen.svg';
+	import palletYellow from '../../assets/palletYellow.svg';
 	import Button from '../../shared/Button.svelte';
 	import { Canvas } from '@threlte/core';
 	import Scene from '../pallete/Scene.svelte';
@@ -27,7 +28,7 @@
 		>
 			{#each SAMPLE_FILLED_PACKING_AREA.palettes as _, i}
 				<img
-					src={i === palletIdx ? palletGreen : pallet}
+					src={i === palletIdx ? palletYellow : i < palletIdx ? palletGreen : pallet}
 					alt="pallet"
 					class="h-full w-full aspect-square"
 				/>
