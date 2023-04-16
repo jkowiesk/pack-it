@@ -1,13 +1,10 @@
 <script>
-	import truck from '../../assets/truck.svg';
-	import pallet from '../../assets/pallet.svg';
-	import palletGreen from '../../assets/palletGreen.svg';
-	import palletYellow from '../../assets/palletYellow.svg';
 	import Button from '../../shared/Button.svelte';
 	import { Canvas } from '@threlte/core';
 	import Scene from '../pallete/Scene.svelte';
 	import { SAMPLE_FILLED_PACKING_AREA, normalize } from '../../alg/packing';
 	import { fromNormalizedToSvelte } from '../pallete/utils';
+	import Truck from '../../shared/Truck.svelte';
 
 	let palletIdx = 0;
 	let boxIdx = 0;
@@ -20,21 +17,7 @@
 </script>
 
 <div class="flex flex-col gap-5 w-5/6 pt-3 mx-auto">
-	<div class="flex align-center gap-1">
-		<div
-			class="h-full grow border-[3px] border-rose-600 rounded-md grid grid-rows-2 grid-flow-col auto-cols-[39px] gap-1 p-1"
-			style="direction: rtl;"
-		>
-			{#each SAMPLE_FILLED_PACKING_AREA.palettes as _, i}
-				<img
-					src={i === palletIdx ? palletYellow : i < palletIdx ? palletGreen : pallet}
-					alt="pallet"
-					class="h-full w-full aspect-square"
-				/>
-			{/each}
-		</div>
-		<img src={truck} alt="truck" class="h-24" />
-	</div>
+	<Truck {palletIdx} />
 	<section class="flex flex-col">
 		<div
 			class="flex flex-col bg-gray-800 shadow-inner shadow-gray-700 border-rose-800 border-x-2 border-t-4 rounded-t-2xl w-full h-96"

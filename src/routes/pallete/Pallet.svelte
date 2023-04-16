@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { T, Object3DInstance } from '@threlte/core';
-	import * as THREE from 'three';
 	import { useGltf } from '@threlte/extras';
 
 	const gltf = useGltf('/pallet.glb');
