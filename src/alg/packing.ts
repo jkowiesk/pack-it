@@ -224,6 +224,7 @@ export const SAMPLE_ORDERS = new Map<string, Order>([
 ]);
 
 export function normalize(palett: FilledPalett): FilledPalett {
+	console.log(palett.boxes);
 	return {
 		dimensions: palett.dimensions,
 		boxes: palett.boxes.map((pBox) => normalizeBox(pBox, palett.dimensions))

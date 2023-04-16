@@ -129,7 +129,6 @@
 	import Button from '../../../shared/Button.svelte';
 
 	import type { PageData } from './$types';
-
 	export let data: PageData;
 	const orderID = data.id;
 

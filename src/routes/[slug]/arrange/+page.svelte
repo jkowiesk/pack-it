@@ -2,22 +2,41 @@
 	import Button from '../../../shared/Button.svelte';
 	import { Canvas } from '@threlte/core';
 	import Scene from '../../pallete/Scene.svelte';
-	import { SAMPLE_FILLED_PACKING_AREA, normalize } from '../../../alg/packing';
+	import { SAMPLE_FILLED_PACKING_AREA, SIZE_DELTA, normalize } from '../../../alg/packing';
 	import { fromNormalizedToSvelte } from '../../pallete/utils';
 	import Truck from '../../../shared/Truck.svelte';
 	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
 
+	export let data: PageData;
+
 	let palletIdx = 0;
 	let boxIdx = 0;
-	$: boxes = fromNormalizedToSvelte(
-		normalize(SAMPLE_FILLED_PACKING_AREA.palettes[palletIdx])
-	).boxes;
+
+	let pIdx = 0;
+	let currBoxes = SAMPLE_FILLED_PACKING_AREA.palettes.map((p) => p.boxes).flat();
+	let transformed = {
+		palettes: data.boxes.palettes.map(({ boxes }) => {
+			++pIdx;
+			return {
+				boxes: Object.entries(boxes).map(([boxId, [x, y, z]]) => {
+					let currBox = currBoxes[+boxId]!;
+					console.log({ x, y, z });
+					return {
+						...currBox,
+						position: { x: x * SIZE_DELTA, y: y * SIZE_DELTA, z: z * SIZE_DELTA }
+					};
+				}),
+				dimensions: SAMPLE_FILLED_PACKING_AREA.palettes[0].dimensions
+			};
+		})
+	};
+
+	$: boxes = fromNormalizedToSvelte(normalize(transformed.palettes[palletIdx])).boxes;
 
 	$: box = boxes[boxIdx - 1]?.data;
 	$: slicedBoxes = boxes.slice(0, boxIdx);
 
-	export let data: PageData;
 	const orderID = data.id;
 </script>
 
