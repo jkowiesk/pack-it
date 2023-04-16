@@ -39,7 +39,7 @@
 					<Order {orderID} {...order} />
 				</Link>
 			{:else}
-				<Link>
+				<Link href="">
 					<Order {orderID} {...order} />
 				</Link>
 			{/if}

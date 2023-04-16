@@ -1,10 +1,11 @@
 <script>
-	import Button from '../../shared/Button.svelte';
+	import Button from '../../../shared/Button.svelte';
 	import { Canvas } from '@threlte/core';
-	import Scene from '../pallete/Scene.svelte';
-	import { SAMPLE_FILLED_PACKING_AREA, normalize } from '../../alg/packing';
-	import { fromNormalizedToSvelte } from '../pallete/utils';
-	import Truck from '../../shared/Truck.svelte';
+	import Scene from '../../pallete/Scene.svelte';
+	import { SAMPLE_FILLED_PACKING_AREA, normalize } from '../../../alg/packing';
+	import { fromNormalizedToSvelte } from '../../pallete/utils';
+	import Truck from '../../../shared/Truck.svelte';
+	import { goto } from '$app/navigation';
 
 	let palletIdx = 0;
 	let boxIdx = 0;
@@ -17,7 +18,13 @@
 </script>
 
 <div class="flex flex-col gap-5 w-5/6 pt-3 mx-auto">
-	<Truck {palletIdx} />
+	<Truck
+		{palletIdx}
+		on:pallete-clicked={({ detail: newPalletIdx }) => {
+			boxIdx = 0;
+			palletIdx = newPalletIdx;
+		}}
+	/>
 	<section class="flex flex-col">
 		<div
 			class="flex flex-col bg-gray-800 shadow-inner shadow-gray-700 border-rose-800 border-x-2 border-t-4 rounded-t-2xl w-full h-96"
@@ -90,14 +97,17 @@
 					++boxIdx;
 				} else {
 					if (palletIdx === SAMPLE_FILLED_PACKING_AREA.palettes.length - 1) {
-						location.href = '../load';
+						goto('../load');
 					} else {
 						boxIdx = 0;
 						++palletIdx;
 					}
 				}
 			}}
-			style="grow basis-0 h-10">next</Button
+			style="grow basis-0 h-10"
+			>{boxIdx === boxes.length && palletIdx === SAMPLE_FILLED_PACKING_AREA.palettes.length - 1
+				? 'start packing'
+				: 'next'}</Button
 		>
 	</div>
 	<div class="w-full p-4" />
