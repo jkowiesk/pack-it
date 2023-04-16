@@ -9,11 +9,13 @@
 	import { fromNormalizedToSvelte } from '../pallete/utils';
 
 	let palletIdx = 0;
-	let boxes = fromNormalizedToSvelte(
+	let boxIdx = 0;
+	$: boxes = fromNormalizedToSvelte(
 		normalize(SAMPLE_FILLED_PACKING_AREA.palettes[palletIdx])
 	).boxes;
 
-	let boxIdx = 0;
+	$: box = boxes[boxIdx].data;
+	$: console.log(boxes[boxIdx]);
 	$: slicedBoxes = boxes.slice(0, boxIdx);
 </script>
 
@@ -41,41 +43,48 @@
 				<Scene on:box-clicked boxes={slicedBoxes} />
 			</Canvas>
 		</div>
-		<div
-			class="grid grid-cols-3 row-span-3 p-4 gap-5 min-h-64 col-span-2 bg-gradient-to-tl from-gray-900 to-gray-800 w-full border-rose-800 border-2 border-b-4 rounded-b-xl shadow-inner shadow-gray-700 justify-items-center items-baseline"
-		>
-			<div class="flex gap-4 col-span-3 justify-self-start">
-				<svg
-					stroke="currentColor"
-					fill="currentColor"
-					stroke-width="0"
-					viewBox="0 0 16 16"
-					class="h-8 w-8 text-rose-600 self-center"
-					xmlns="http://www.w3.org/2000/svg"
-					><path
-						d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"
-					/></svg
-				>
-				<div class="flex-col gap=0">
-					<h3 class="text-rose-600 text-[0.7rem]">Reference ID</h3>
-					<p class="text-white text-sm">01AB02132132</p>
+
+		{#if boxIdx !== 0}
+			<div
+				class="grid grid-cols-3 row-span-3 h-32 p-4 gap-2 bg-gradient-to-tl from-gray-900 to-gray-800 w-full border-rose-800 border-2 border-b-4 rounded-b-xl shadow-inner shadow-gray-700 justify-items-start items-baseline"
+			>
+				<div class="flex gap-4 col-span-3 justify-self-start">
+					<svg
+						stroke="currentColor"
+						fill="currentColor"
+						stroke-width="0"
+						viewBox="0 0 16 16"
+						class="h-8 w-8 text-rose-600"
+						xmlns="http://www.w3.org/2000/svg"
+						><path
+							d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"
+						/></svg
+					>
+					<div class="">
+						<h3 class="text-rose-600 text-[0.7rem]">Reference ID</h3>
+						<p class="text-white text-sm">{box.refID}</p>
+					</div>
+				</div>
+
+				<div class=" ">
+					<h3 class="text-rose-600 text-[0.55rem]">Packager</h3>
+					<p class="text-gray-300 text-[0.7rem]">{box.packager}</p>
+				</div>
+
+				<div class=" ">
+					<h3 class="text-rose-600 text-[0.55rem]">From</h3>
+					<p class="text-gray-300 text-[0.7rem]">{box.from}</p>
+				</div>
+				<div class=" ">
+					<h3 class="text-rose-600 text-[0.55rem]">Destination</h3>
+					<p class="text-gray-300 text-[0.7rem]">{box.to}</p>
 				</div>
 			</div>
-
-			<div class=" flex-col">
-				<h3 class="text-rose-600 text-[0.55rem]">Packager</h3>
-				<p class="text-gray-300 text-[0.7rem]">Jakub Kowieski</p>
-			</div>
-
-			<div class=" flex-col">
-				<h3 class="text-rose-600 text-[0.55rem]">From</h3>
-				<p class="text-gray-300 text-[0.7rem]">Jakub Kowieski</p>
-			</div>
-			<div class=" flex-col">
-				<h3 class="text-rose-600 text-[0.55rem]">Destination</h3>
-				<p class="text-gray-300 text-[0.7rem]">Jakub Kowieski</p>
-			</div>
-		</div>
+		{:else}
+			<div
+				class="h-32 bg-gradient-to-tl from-gray-900 to-gray-800 w-full border-rose-800 border-2 border-b-4 rounded-b-xl shadow-inner shadow-gray-700"
+			/>
+		{/if}
 	</section>
 	<div class="flex gap-5 w-full">
 		<Button

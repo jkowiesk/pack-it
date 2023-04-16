@@ -1,5 +1,34 @@
 export const SIZE_DELTA = 20;
 
+export interface BoxData {
+	refID: string;
+	packager: string;
+	from: string;
+	to: string;
+}
+
+// geneate random BoxData from given arrays of mocked data
+
+const REF_ID = ['AD23M9384JF8', 'LE93K7DM819K', 'LJF8JF8JF8JF', 'LJF8JF8JF8JF', 'BD23G93842F8'];
+const PACKAGERS = [
+	'Marek Markowski',
+	'Karol Orzechowski',
+	'Jan Kowalski',
+	'Piotr Nowak',
+	'Adam Kowalski'
+];
+const FROM = ['Intel', 'AMD', 'Nvidia', 'Samsung', 'Apple'];
+const TO = ['SIEMENS', 'Bosh', 'Philips', 'Sony', 'Panasonic', 'Amazon', 'Google'];
+
+export function generateRandomBoxData(): BoxData {
+	return {
+		refID: REF_ID[Math.floor(Math.random() * REF_ID.length)],
+		packager: PACKAGERS[Math.floor(Math.random() * PACKAGERS.length)],
+		from: FROM[Math.floor(Math.random() * FROM.length)],
+		to: TO[Math.floor(Math.random() * TO.length)]
+	};
+}
+
 export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
 	palettes: [
 		{
@@ -13,7 +42,8 @@ export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
 						},
 						weight: 20
 					},
-					position: { x: 0, y: 0, z: 0 }
+					position: { x: 0, y: 0, z: 0 },
+					data: generateRandomBoxData()
 				},
 				{
 					box: {
@@ -24,7 +54,8 @@ export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
 						},
 						weight: 10
 					},
-					position: { x: 0, y: 0, z: SIZE_DELTA * 1 }
+					position: { x: 0, y: 0, z: SIZE_DELTA * 1 },
+					data: generateRandomBoxData()
 				},
 				{
 					box: {
@@ -35,7 +66,8 @@ export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
 						},
 						weight: 40
 					},
-					position: { x: SIZE_DELTA * 3, y: 0, z: SIZE_DELTA * 1 }
+					position: { x: SIZE_DELTA * 3, y: 0, z: SIZE_DELTA * 1 },
+					data: generateRandomBoxData()
 				},
 				{
 					box: {
@@ -46,7 +78,65 @@ export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
 						},
 						weight: 100
 					},
-					position: { x: SIZE_DELTA * 4, y: 0, z: SIZE_DELTA * 2 }
+					position: { x: SIZE_DELTA * 4, y: 0, z: SIZE_DELTA * 2 },
+					data: generateRandomBoxData()
+				}
+			],
+			dimensions: {
+				dx: SIZE_DELTA * 8,
+				dy: SIZE_DELTA * 10,
+				dz: SIZE_DELTA * 4
+			}
+		},
+		{
+			boxes: [
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 1,
+							dy: SIZE_DELTA * 2,
+							dz: SIZE_DELTA * 1
+						},
+						weight: 20
+					},
+					position: { x: 0, y: 0, z: 0 },
+					data: generateRandomBoxData()
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 1,
+							dy: SIZE_DELTA * 1,
+							dz: SIZE_DELTA * 1
+						},
+						weight: 10
+					},
+					position: { x: 0, y: 0, z: SIZE_DELTA * 1 },
+					data: generateRandomBoxData()
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 1,
+							dy: SIZE_DELTA * 5,
+							dz: SIZE_DELTA * 2
+						},
+						weight: 40
+					},
+					position: { x: SIZE_DELTA * 3, y: 0, z: SIZE_DELTA * 1 },
+					data: generateRandomBoxData()
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 2,
+							dy: SIZE_DELTA * 2,
+							dz: SIZE_DELTA * 1
+						},
+						weight: 100
+					},
+					position: { x: SIZE_DELTA * 4, y: 0, z: SIZE_DELTA * 2 },
+					data: generateRandomBoxData()
 				}
 			],
 			dimensions: {
@@ -66,7 +156,7 @@ export function normalize(palett: FilledPalett): FilledPalett {
 }
 
 function normalizeBox(
-	{ box, position }: PositionedBox,
+	{ box, position, data }: PositionedBox,
 	palettDimensions: Dimensions
 ): PositionedBox {
 	const boxDimensionsNormalized: Dimensions = {
@@ -83,7 +173,8 @@ function normalizeBox(
 		box: {
 			weight: box.weight,
 			dimensions: boxDimensionsNormalized
-		}
+		},
+		data
 	};
 }
 
@@ -91,7 +182,11 @@ export function fill(packingArea: PackingArea, boxes: Box[]): FilledPackingArea 
 	return {
 		palettes: [
 			{
-				boxes: boxes.map((box) => ({ box: box, position: { x: 0, y: 0, z: 0 } })),
+				boxes: boxes.map((box) => ({
+					box: box,
+					position: { x: 0, y: 0, z: 0 },
+					data: { refID: 'ID', packager: 'Marek', from: 'marek', to: 'to' }
+				})),
 				dimensions: packingArea.palettes[0][0].dimensions
 			}
 		]
@@ -129,6 +224,7 @@ export interface FilledPalett extends Palett {
 export interface PositionedBox {
 	box: Box;
 	position: Position;
+	data: BoxData;
 }
 
 export interface Box {

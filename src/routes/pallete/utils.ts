@@ -16,7 +16,8 @@ export function fromNormalizedToSvelte(normalized: FilledPalett): FilledPalett {
 					x: box.position.x * 1.2,
 					y: box.position.y,
 					z: box.position.z * 0.822
-				}
+				},
+				data: box.data
 			};
 		}),
 		dimensions: {
