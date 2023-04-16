@@ -5,7 +5,9 @@
 </script>
 
 {#if done}
-	<div class="bg-green-600 rounded-md p-4 grid grid-cols-2 grid-rows-2 h-32 self-baseline w-full">
+	<div
+		class=" bg-rose-600 shadow-rose-700 rounded-md p-4 grid grid-cols-2 grid-rows-2 h-32 self-baseline w-full shadow-lg"
+	>
 		<div class="flex items-baseline gap-2 col-span-1">
 			<h3 class="bg-clip-text text-transparent bg-gradient-to-tl text-md from-gray-800 to-gray-700">
 				Order ID
@@ -40,7 +42,9 @@
 		<div />
 	</div>
 {:else}
-	<div class="bg-rose-600 rounded-md p-4 grid grid-cols-2 grid-rows-2 h-32 self-baseline w-full">
+	<div
+		class=" bg-green-600 shadow-green-700 shadow-lg rounded-md p-4 grid grid-cols-2 grid-rows-2 h-32 self-baseline w-full"
+	>
 		<div class="flex items-baseline gap-2 col-span-1">
 			<h3 class="bg-clip-text text-transparent bg-gradient-to-tl text-md from-gray-800 to-gray-700">
 				Order ID

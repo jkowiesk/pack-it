@@ -8,7 +8,6 @@
 	interactivity();
 
 	export let boxes: PositionedBox[];
-	// console.log(boxes);
 </script>
 
 <T.PerspectiveCamera makeDefault position={[0, 1.4, -1.7]}
