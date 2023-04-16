@@ -13,18 +13,25 @@ export interface Order {
 	done: boolean;
 }
 
-// geneate random BoxData from given arrays of mocked data
-
-const REF_ID = ['AD23M9384JF8', 'LE93K7DM819K', 'LJF8JF8JF8JF', 'LJF8JF8JF8JF', 'BD23G93842F8'];
+const REF_ID = [
+	'AD23M9384JF8',
+	'LE93K7DM819K',
+	'LJF8JF8JF8JF',
+	'FI230ASI938U',
+	'BD23G93842F8',
+	'AE93K3M8183'
+];
 const PACKAGERS = [
 	'Marek Markowski',
 	'Karol Orzechowski',
 	'Jan Kowalski',
 	'Piotr Nowak',
-	'Adam Kowalski'
+	'Adam Kowalski',
+	'Franek Angelo',
+	'Mark Quick'
 ];
-const FROM = ['Intel', 'AMD', 'Nvidia', 'Samsung', 'Apple'];
-const TO = ['SIEMENS', 'Bosh', 'Philips', 'Sony', 'Panasonic', 'Amazon', 'Google'];
+const FROM = ['Intel', 'AMD', 'Nvidia', 'Samsung', 'Apple', 'Allegro', "McDonald's", 'KFC'];
+const TO = ['SIEMENS', 'Bosh', 'Philips', 'Sony', 'Panasonic', 'Amazon', 'Google', 'Microsoft'];
 
 export function generateRandomBoxData(): BoxData {
 	return {
@@ -142,6 +149,63 @@ export const SAMPLE_FILLED_PACKING_AREA: FilledPackingArea = {
 						weight: 100
 					},
 					position: { x: SIZE_DELTA * 4, y: 0, z: SIZE_DELTA * 2 },
+					data: generateRandomBoxData()
+				}
+			],
+			dimensions: {
+				dx: SIZE_DELTA * 8,
+				dy: SIZE_DELTA * 10,
+				dz: SIZE_DELTA * 4
+			}
+		},
+		{
+			boxes: [
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 2,
+							dy: SIZE_DELTA * 2,
+							dz: SIZE_DELTA * 2
+						},
+						weight: 20
+					},
+					position: { x: 0, y: 0, z: 0 },
+					data: generateRandomBoxData()
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 2,
+							dy: SIZE_DELTA * 2,
+							dz: SIZE_DELTA * 1
+						},
+						weight: 10
+					},
+					position: { x: 0, y: SIZE_DELTA * 2, z: 0 },
+					data: generateRandomBoxData()
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 3,
+							dy: SIZE_DELTA * 3,
+							dz: SIZE_DELTA * 2
+						},
+						weight: 40
+					},
+					position: { x: SIZE_DELTA * 3, y: 0, z: SIZE_DELTA * 1 },
+					data: generateRandomBoxData()
+				},
+				{
+					box: {
+						dimensions: {
+							dx: SIZE_DELTA * 2,
+							dy: SIZE_DELTA * 2,
+							dz: SIZE_DELTA * 1
+						},
+						weight: 100
+					},
+					position: { x: SIZE_DELTA * 5, y: 0, z: SIZE_DELTA * 3 },
 					data: generateRandomBoxData()
 				}
 			],
