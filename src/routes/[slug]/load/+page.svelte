@@ -17,7 +17,9 @@
 	/>
 	ID: 1028374613407461
 	<BarCode />
-	<div class="flex flex-col basis-0 grow items-stretch gap-5 w-full px-2 overflow-x-scroll">
+	<div
+		class="flex flex-col basis-0 grow items-stretch gap-5 w-full px-2 overflow-y-scroll overflow-x-hidden"
+	>
 		{#each palettes[palletIdx].boxes as { data: box }}
 			<div
 				class="grid grid-cols-3 row-span-3 h-32 p-2 gap-2 bg-gradient-to-tl from-gray-900 to-gray-800 w-full border-rose-800 border-2 rounded-xl shadow-inner shadow-gray-700 justify-items-start items-baseline"
